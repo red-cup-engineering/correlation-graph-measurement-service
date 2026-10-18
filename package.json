@@ -6,8 +6,7 @@
   "description": "Constructs a finite weighted relation from causally bounded entity-return histories.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/red-cup-engineering/computer-web-engineering-services-section.git",
-    "directory": "services/web-platform-services-section/services/web2-platform-services-section/services/web2-financial-platform-services-section/services/web2-financial-brokerage-platform-services-section/services/alpaca-services-section/services/correlation-graph-measurement-service"
+    "url": "git+https://github.com/red-cup-engineering/correlation-graph-measurement-service.git"
   },
   "exports": {
     ".": "./src/measure.mjs"
