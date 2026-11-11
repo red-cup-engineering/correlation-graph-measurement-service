@@ -8,3 +8,12 @@
 <!-- 561-group-standards:badges:end -->
 
 Constructs a finite weighted relation from causally bounded entity-return histories.
+
+`measureCorrelationGraph({ returnsByEntity })` measures Pearson correlations
+between equal-length, prealigned histories of at least three observations.
+The default returns positively correlated edges. Set `positiveOnly: false`
+to include inverse relationships with `transport: -1`.
+`minimumAbsoluteCorrelation` sets an optional cutoff in [0, 1].
+
+Missing values, constant histories, and nonfinite moments fail. Run
+`npm test` to check signed edges and these refusal cases.

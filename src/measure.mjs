@@ -15,6 +15,7 @@ function correlation(left, right) {
     const l = left[index] - lm, r = right[index] - rm;
     numerator += l * r; ld += l * l; rd += r * r;
   }
+  if (![numerator, ld, rd].every(Number.isFinite)) throw new RangeError("correlation-nonfinite-moment");
   if (!(ld > 0 && rd > 0)) throw new RangeError("correlation-unidentifiable-zero-variance");
   const denominator = Math.sqrt(ld) * Math.sqrt(rd);
   const observed = numerator / denominator;
@@ -38,7 +39,8 @@ export function measureCorrelationGraph({ returnsByEntity, positiveOnly = true, 
   const entities = Object.keys(returnsByEntity).sort(), length = returnsByEntity[entities[0]]?.length;
   if (entities.length < 2 || !Number.isInteger(length) || length < 3 ||
       entities.some((entity) => !Array.isArray(returnsByEntity[entity]) ||
-        returnsByEntity[entity].length !== length || returnsByEntity[entity].some((value) => !admissible(value))))
+        returnsByEntity[entity].length !== length || returnsByEntity[entity].includes(undefined) ||
+        returnsByEntity[entity].some(value => !admissible(value))))
     throw new TypeError("equal-finite-return-histories-required");
   const numeric = Object.fromEntries(entities.map((entity) => [entity, returnsByEntity[entity].map(Number)]));
   const edges = [];
